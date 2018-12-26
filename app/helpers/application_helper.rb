@@ -16,5 +16,15 @@ module ApplicationHelper
 
   def flash_class flash_type
     FLASH_TYPE[flash_type] || flash_type.to_s
+  end
+
+  def show_field_error form, attribute
+    error_field = <<-HTML
+      <div class="md-input-message-animation">
+        #{t('activerecord.errors.models')[form.object.class.name.downcase
+          .to_sym][:attributes][attribute]} #{form.object.errors[attribute].first}
+      </div>
+    HTML
+    error_field.html_safe if form.object.errors[attribute].present?
   end   
 end

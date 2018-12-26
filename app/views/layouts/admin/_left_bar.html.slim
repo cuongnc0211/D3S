@@ -18,6 +18,10 @@ aside.main-sidebar
     ul.sidebar-menu data-widget="tree"
       li.header MAIN NAVIGATION
       li
+        = link_to admin_users_path do
+          i.fa.fa-user
+          span Users      
+      li
         = link_to "#" do
           i.fa.fa-dashboard
           span Menu

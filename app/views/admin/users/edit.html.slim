@@ -1,0 +1,19 @@
+section.content id='admin-users-edit'
+  .row
+    .col-md-6
+      .box.box-success
+        .box-header.with-border
+          h3.box-title= t('edit_user')
+        .box-body
+          = simple_form_for [:admin, @user], defaults: {label: false}, html: {id: "edit-user", multipart: true} do |f|
+            .form-group
+              = f.label :user_role
+              - if current_user.admin?
+                = f.select :role, options_for_select([["Moderator", :mod], ["Admin", :admin]], @user.role), {include_blank: "Please select User Role"}, {class: "form-control"}
+              = show_field_error f, :role
+            .form-group
+              = f.label :name, "User name"
+              = f.input :name, class: "form-control"
+            .form-group.text-center
+              = f.submit "Submit", class: "btn btn-block btn-primary"
+              = link_to "Cancel", admin_users_path, class: 'btn btn-block btn-danger'
